@@ -15,27 +15,15 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var changeBtnOl: UIButton!
     
-    var timer: CADisplayLink?
-    
-    let avController = AVController.shared
-    let pView = AVCaptureVideoPreviewLayer()
-    
-    var previewLayer = AVCaptureVideoPreviewLayer()
-    
     var rightEye = UIView()
     var leftEye = UIView()
     var mouth = UIView()
     var mouthBox = UIView()
     var faceBox = UIView()
-//    let glasses = UIImageView(image: #imageLiteral(resourceName: "glassess"))
-//    let smok = UIImageView(image: #imageLiteral(resourceName: "smok"))
-//    let hat = UIImageView(image: #imageLiteral(resourceName: "hat"))
-//    let goldChain = UIImageView(image: #imageLiteral(resourceName: "gc"))
-    var glasses: UIImageView?
-    var smok: UIImageView?
-    var hat: UIImageView?
-    var goldChain: UIImageView?
-    
+    let glasses = UIImageView(image: #imageLiteral(resourceName: "glassess"))
+    let smok = UIImageView(image: #imageLiteral(resourceName: "smok"))
+    let hat = UIImageView(image: #imageLiteral(resourceName: "hat"))
+    let goldChain = UIImageView(image: #imageLiteral(resourceName: "gc"))
     
     let thugLife = UIImageView(image: #imageLiteral(resourceName: "tl"))
     
@@ -44,21 +32,11 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        previewLayer = avController.previewLayerOutput()!
-        previewLayer.frame = UIScreen.main.bounds
-        imageView.layer.addSublayer(previewLayer)
-        avController.startToScan()
-        
         changeBtnOl.layer.cornerRadius = changeBtnOl.frame.height / 2
         
 //        thugLife.contentMode = .scaleAspectFit
 //        thugLife.frame = CGRect
         
-        
-        
-        timer = CADisplayLink(target: self, selector: #selector(detect))
-        timer?.preferredFramesPerSecond = 12
-        timer?.add(to: RunLoop.main, forMode: .defaultRunLoopMode)
         detect()
     }
     
@@ -88,37 +66,14 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     @objc func detect() {
         
-//        faceBox.removeFromSuperview()
-//        leftEye.removeFromSuperview()
-//        rightEye.removeFromSuperview()
-//        mouth.removeFromSuperview()
-//        mouthBox.removeFromSuperview()
-
-        if glasses == nil {
-            glasses = UIImageView(image: #imageLiteral(resourceName: "glassess"))
-            smok = UIImageView(image: #imageLiteral(resourceName: "smok"))
-            hat = UIImageView(image: #imageLiteral(resourceName: "hat"))
-            goldChain = UIImageView(image: #imageLiteral(resourceName: "gc"))
-            
-            glasses?.contentMode = .scaleAspectFit
-            smok?.contentMode = .scaleAspectFit
-            hat?.contentMode = .scaleAspectFit
-            goldChain?.contentMode = .scaleAspectFit
-        }
-        
-        
-//        var currentImage = UIImage()
-//        UIGraphicsBeginImageContextWithOptions(imageView.bounds.size, false, 0)
-//
-//        currentImage = UIGraphicsGetImageFromCurrentImageContext()!
-//
-//        UIGraphicsEndImageContext()
-//        imageView.image = currentImage
-//        print(currentImage.size)
+        faceBox.removeFromSuperview()
+        leftEye.removeFromSuperview()
+        rightEye.removeFromSuperview()
+        mouth.removeFromSuperview()
+        mouthBox.removeFromSuperview()
         
         // 將圖片轉為 CIImage
-//        guard let faceImage = CIImage(image: imageView.image!) else { return }
-//        guard let faceImage = CIImage( else { return }
+        guard let faceImage = CIImage(image: imageView.image!) else { return }
         
         
         // 精準度設定準備
